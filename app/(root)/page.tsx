@@ -23,9 +23,9 @@ const Page = () =>{
 
       <div className="interviews-section ">
         {dummyInterviews.map((interview)=>(
-            <div className="gap-4 transition-all transform duration-300 ease-in-out hover:translate-y-[-7px] hover:scale-102">
+
             <InterviewCard {...interview} key={interview.id}/>
-            </div>
+
         ))}
       </div>
     </section>
@@ -33,9 +33,9 @@ const Page = () =>{
       <h2 className="mb-3"> Take an Interview</h2>
       <div className="interviews-section">
         {dummyInterviews.map((interview)=>(
-            <div className="gap-4 transition-all transform duration-300 ease-in-out hover:translate-y-[-7px] hover:scale-102">
+
             <InterviewCard {...interview} key={interview.id}/>
-            </div>
+
         ))}
         {/*<p>You haven&apos;t taken any interviews yet/p>*/}
       </div>

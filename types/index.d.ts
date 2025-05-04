@@ -39,7 +39,7 @@ interface User {
 }
 
 interface InterviewCardProps {
-  interviewId?: string;
+  id?: string;
   userId?: string;
   role: string;
   type: string;
@@ -60,6 +60,14 @@ interface RouteParams {
   params: Promise<Record<string, string>>;
   searchParams: Promise<Record<string, string>>;
 }
+
+
+// interface RouteParams {
+//   params: {
+//     id: string; // or Record<string, string> if dynamic
+//   };
+//   searchParams?: Record<string, string>; // Optional (for query params)
+// }
 
 interface GetFeedbackByInterviewIdParams {
   interviewId: string;

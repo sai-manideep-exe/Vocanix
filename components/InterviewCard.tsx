@@ -16,7 +16,7 @@ const InterviewCard = async({ id,userId,role,type,techstack,createdAt }: Intervi
 
 
     return(
-    <div className="card-border w-[360px] max-sm:w-full min-h-96 transition-all transform duration-300 ease-in-out hover:translate-y-[-7px] hover:scale-102     ">
+    <div className="card-border w-[360px] max-sm:w-full min-h-96 transition-all transform duration-200 ease-in-out hover:translate-y-[-7px] hover:scale-102     ">
         <div className="card-interview">
             <div>
                 <div className="absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-light-600">

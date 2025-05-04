@@ -8,7 +8,7 @@ import Agent from "@/components/Agent";
 import {getCurrentUser} from "@/lib/actions/auth.action";
 
 const Page = async({params}: RouteParams)=>{
-    const { id } = params;
+    const { id } = await params;
     const user = await getCurrentUser();
     const interview = await getInterviewById(id);
 
@@ -32,7 +32,7 @@ const Page = async({params}: RouteParams)=>{
             </div>
 
             <Agent
-                   userName={user?.name!}
+                   userName={user?.name || ''}
                    userId={user?.id}
                    interviewId={id}
                    type="interview"

@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react';
 import Image from "next/image";
 import {cn} from "@/lib/utils";
+import {createFeedback} from "@/lib/actions/general.action";
 import {vapi} from '@/lib/vapi.sdk'
 import {interviewer} from "@/constants";
 import {useRouter} from "next/navigation";
@@ -64,11 +65,11 @@ const Agent = ({ userName,userId,type,interviewId, questions } : AgentProps) =>{
         console.log('Generate feedback here.')
 
 
-        //TODO Createa a server action taht creates a feedback
-        const { success,id } ={
-            success:true,
-            id:'feedback-id'
-        }
+        const { success, feedbackId: id } = await createFeedback({
+            interviewId:interviewId!,
+            userId:userId!,
+            transcript:messages
+        })
 
         if(success && id) {
             router.push(`/interview/${interviewId}/feedback`)

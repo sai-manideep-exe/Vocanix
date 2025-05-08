@@ -9,14 +9,14 @@ import {getFirestore} from "firebase/firestore";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyCMIXtdqh53pCdt_vT7L00Ppj3FdtKcHnE",
-    authDomain: "vocanix.firebaseapp.com",
-    projectId: "vocanix",
-    storageBucket: "vocanix.firebasestorage.app",
-    messagingSenderId: "885095430413",
-    appId: "1:885095430413:web:39872be519d6f985579844",
-    measurementId: "G-P31ZRYK3LZ"
-};
+    apiKey: process.env.NEXT_PUBLIC_APIKEY,// Use NEXT_PUBLIC_ prefix for client-side
+    authDomain: process.env.AUTHDOMAIN,
+    projectId: process.env.PROJECTID,
+    storageBucket: process.env.STORAGEBUCKET,
+    messagingSenderId: process.env.MESSAGINGSENDERID,
+    appId: process.env.APPID,
+    measurementId: process.env.MEASUREMENTID,
+  };
 
 // Initialize Firebase
 const app = !getApps.length ? initializeApp(firebaseConfig) : getApp();

@@ -1,5 +1,5 @@
-## Vocanix
+# Vocanix
 
-# LIVE:
+## LIVE:
 
 https://vocanix.vercel.app/

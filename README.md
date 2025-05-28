@@ -2,7 +2,7 @@
 
 
 
-Vocanix is a full-stack AI-powered platform for realistic interview practice, instant feedback, and skill tracking. Whether you're preparing for your next tech interview or just want to sharpen your skills, Vocanix provides an interactive and insightful experience.
+Vocanix is a full-stack AI-powered platform for realistic interview practice, instant AI feedback, and skill tracking. Whether you're preparing for your next tech interview or just want to sharpen your skills, Vocanix provides an interactive and insightful experience.
 
 ---
 

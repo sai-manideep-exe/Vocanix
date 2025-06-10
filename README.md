@@ -16,7 +16,7 @@ Vocanix is a full-stack AI-powered platform for realistic interview practice, in
 
 ---
 
-## 🖥️ Live Demo
+## 🖥️ Live Link
 
 👉 [vocanix.vercel.app](https://vocanix.vercel.app)
 

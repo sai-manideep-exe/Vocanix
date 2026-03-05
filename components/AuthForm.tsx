@@ -17,6 +17,7 @@ import FormField from "@/components/FormField"
 import { useRouter } from "next/navigation"
 
 
+
 import React from 'react';
 
 const authFormSchema = (type: FormType) => {
@@ -43,10 +44,9 @@ const AuthForm = ({ type } : { type: FormType }) =>{
         },
     })
 
-    // 2. Define a submit handler.
+    // 2. Define a submit handler.1
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
+        
         try{
             if(type==='sign-up'){
                 const { name, email, password } = values
@@ -86,6 +86,7 @@ const AuthForm = ({ type } : { type: FormType }) =>{
 
                 toast.success('Signed in sucesssfully.')
                 router.push('/')
+                
             }
 
         } catch(error){

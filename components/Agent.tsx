@@ -83,20 +83,25 @@ const Agent = ({ userName, userId, type, interviewId, questions }: AgentProps) =
     useEffect(() => {
         if (callStatus === CallStatus.FINISHED) {
             if (type == 'generate') {
-                // Claim the interview that Vapi just created.
-                // This securely links it to the real userId via session cookie,
-                // bypassing the Vapi {{userid}} variable substitution bug.
-                if (callStartTime) {
+                const callDuration = callStartTime ? Date.now() - callStartTime : 0;
+                const wasRealCall = callDuration > 10000; // more than 10 seconds
+
+                if (wasRealCall && callStartTime) {
+                    // Claim the interview that Vapi just created.
+                    // This securely links it to the real userId via session cookie,
+                    // bypassing the Vapi {{userid}} variable substitution bug.
                     claimLatestInterview(callStartTime).then((result) => {
                         console.log('Claim result:', result);
+                        router.push('/');
                     });
+                } else if (!wasRealCall) {
+                    console.log(`Call ended too quickly (${callDuration}ms) - likely an ejection. Staying on page.`);
+                    setCallStatus(CallStatus.INACTIVE); // reset so user can try again
                 }
-                router.push('/')
 
             } else {
                 handleGenerateFeedback(messages);
             }
-
         }
     }, [messages, callStatus, type, userId, callStartTime]);
 

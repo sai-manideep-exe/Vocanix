@@ -5,6 +5,44 @@ import { google } from "@ai-sdk/google";
 
 import { db } from "@/firebase/admin";
 import { feedbackSchema } from "@/constants";
+import { getCurrentUser } from "@/lib/actions/auth.action";
+
+// Called from the frontend after a "generate" type call ends.
+// Since Vapi doesn't reliably substitute {{userid}} in API Request bodies,
+// this server action securely gets the userId from the session cookie and
+// overwrites the garbage "{{ userid }}" value saved by the Vapi webhook.
+export async function claimLatestInterview(callStartedAt: number): Promise<{ success: boolean; interviewId?: string }> {
+    const user = await getCurrentUser();
+    if (!user) return { success: false };
+
+    // Find the interview that was just created during this call.
+    // We use a 30s buffer before callStartedAt to account for any clock skew.
+    const startISO = new Date(callStartedAt - 30000).toISOString();
+
+    try {
+        const snapshot = await db
+            .collection("interviews")
+            .where("createdAt", ">=", startISO)
+            .orderBy("createdAt", "asc")
+            .limit(1)
+            .get();
+
+        if (snapshot.empty) {
+            console.log("claimLatestInterview: no interview found after", startISO);
+            return { success: false };
+        }
+
+        const doc = snapshot.docs[0];
+        await doc.ref.update({ userId: user.id });
+        console.log("✅ claimLatestInterview: claimed interview", doc.id, "for user", user.id);
+        return { success: true, interviewId: doc.id };
+    } catch (e) {
+        console.error("claimLatestInterview error:", e);
+        return { success: false };
+    }
+}
+
+
 
 export async function createFeedback(params: CreateFeedbackParams) {
     const { interviewId, userId, transcript, feedbackId } = params;
